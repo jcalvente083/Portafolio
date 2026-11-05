@@ -1,0 +1,92 @@
+[
+    {
+        "nombre": "Python",
+        "icono": "assets/icons/python.svg",
+        "color": ""
+    },
+    {
+        "nombre": "PyTorch",
+        "icono": "assets/icons/pytorch.svg",
+        "color": ""
+    },
+    {
+        "nombre": "scikit-learn",
+        "icono": "assets/icons/scikitlearn.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Java",
+        "icono": "assets/icons/java.svg",
+        "color": ""
+    },
+    {
+        "nombre": "C/C++",
+        "icono": "assets/icons/cplusplus.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Docker",
+        "icono": "assets/icons/docker.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Git",
+        "icono": "assets/icons/git.svg",
+        "color": ""
+    },
+    {
+        "nombre": "FastAPI",
+        "icono": "assets/icons/fastapi.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Flutter",
+        "icono": "assets/icons/flutter.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Qt",
+        "icono": "assets/icons/qt.svg",
+        "color": ""
+    },
+    {
+        "nombre": "OpenCV",
+        "icono": "assets/icons/opencv.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Raspberry Pi",
+        "icono": "assets/icons/raspberrypi.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Haskell",
+        "icono": "assets/icons/haskell.svg",
+        "color": ""
+    },
+    {
+        "nombre": "R",
+        "icono": "assets/icons/r.svg",
+        "color": ""
+    },
+    {
+        "nombre": "MatLab",
+        "icono": "assets/icons/matlab.svg",
+        "color": ""
+    },
+    {
+        "nombre": "PL/SQL",
+        "icono": "assets/icons/oracle.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Bash/Shell",
+        "icono": "assets/icons/bash.svg",
+        "color": ""
+    },
+    {
+        "nombre": "Netlogo",
+        "icono": "assets/netlogo.png",
+        "color": ""
+    }
+]

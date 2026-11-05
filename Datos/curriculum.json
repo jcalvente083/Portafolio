@@ -1,0 +1,134 @@
+{
+    "formacionReglada": [
+        {
+            "fecha": "2019 - Presente",
+            "titulo": "Grado en Ingeniería Informática",
+            "institucion": "Universidad de Huelva",
+            "descripcion": "Especialización en Computación."
+        },
+        {
+            "fecha": "2017 - 2019",
+            "titulo": "Bachillerato en Ciencias",
+            "institucion": "IES Ntra. Sra. de los Remedios (Ubrique)",
+            "descripcion": "Enfoque en matemáticas, física y tecnología. Nota media: 7,33/10."
+        }
+    ],
+    "formacionNoReglada": [
+        {
+            "fecha": "2026",
+            "titulo": "Programación en Inteligencia Artificial y Big Data aplicables en entornos 5G",
+            "institucion": "UTE Vodafone Integra Formación 5G Plus (Huelva)",
+            "descripcion": "Programa formativo IFCD99 de 150 horas, con nivel de cualificación 4: seguridad en tecnologías 5G, proyectos de análisis y explotación de datos con BI, inteligencia artificial y big data."
+        },
+        {
+            "fecha": "2026",
+            "titulo": "Programación para soluciones de IoT y Smart City aplicables a entornos 5G",
+            "institucion": "UTE Vodafone Integra Formación 5G Plus (Huelva)",
+            "descripcion": "Programa formativo IFCD97 de 150 horas, con nivel de cualificación 3: seguridad en tecnologías 5G, legislación sobre IoT y proyectos de análisis de sensórica."
+        },
+        {
+            "fecha": "2025",
+            "titulo": "Seminario FORMA25",
+            "institucion": "Universidad de Huelva",
+            "descripcion": "Diseño e implementación de sistemas de agentes en NetLogo y desarrollo de un modelo funcional aplicado a un problema de investigación."
+        },
+        {
+            "fecha": "2023",
+            "titulo": "CCNA 1: Introducción a las redes",
+            "institucion": "Cisco Networking Academy",
+            "descripcion": "Conceptos básicos de redes, protocolos y dispositivos de red."
+        }
+    ],
+    "premiosMenciones": [
+        {
+            "fecha": "2026",
+            "titulo": "Finalista de los IV Premios a los mejores TFG y TFM en Inteligencia Artificial (categoría TFG)",
+            "institucion": "Sopra Steria, IV Congreso de Inteligencia Artificial de Andalucía",
+            "descripcion": "TFG «Modelos de Inteligencia Artificial para la detección y diagnóstico precoz de enfermedades neurodegenerativas mediante el estudio de la voz», seleccionado como finalista en la IV edición de estos premios, que reconocen los mejores trabajos de fin de estudios sobre IA defendidos en universidades andaluzas. Entrega en el IV Congreso de Inteligencia Artificial de Andalucía (Granada, octubre de 2026)."
+        },
+        {
+            "fecha": "2026",
+            "titulo": "Matrícula de Honor en el Trabajo Fin de Grado",
+            "institucion": "Universidad de Huelva",
+            "descripcion": "Calificación de 10 por Cortex-AI, una app multiplataforma para la detección precoz del Parkinson mediante modelos de IA propios."
+        }
+    ],
+    "comunidad": [
+        {
+            "fecha": "2026",
+            "titulo": "Organizador y coordinador del seminario FORMA26",
+            "institucion": "Universidad de Huelva",
+            "descripcion": "Tras participar en FORMA25, organicé y coordiné la siguiente edición del seminario."
+        }
+    ],
+    "congresos": [
+        {
+            "fecha": "2026",
+            "titulo": "V Congreso de Ciberseguridad de Andalucía",
+            "institucion": "Agencia Digital de Andalucía (Málaga)",
+            "descripcion": "Celebrado en FYCMA los días 24 y 25 de marzo bajo el lema «Territorios Seguros, Futuro Conectado», con más de 3.000 profesionales, empresas y administraciones públicas."
+        },
+        {
+            "fecha": "2024",
+            "titulo": "III Congreso de Ciberseguridad de Andalucía",
+            "institucion": "Agencia Digital de Andalucía (Málaga)",
+            "descripcion": "Celebrado en FYCMA los días 13 y 14 de marzo, con 29 ponencias, 7 mesas redondas y 8 talleres sobre las últimas tendencias en ciberseguridad."
+        }
+    ],
+    "iaMl": [
+        "PyTorch",
+        "scikit-learn",
+        "XGBoost",
+        "Wav2Vec2 (Hugging Face)",
+        "librosa",
+        "SHAP",
+        "Grad-CAM",
+        "YOLO",
+        "ONNX Runtime",
+        "A*",
+        "CSP (AC-3)",
+        "STRIPS",
+        "Sistemas basados en reglas",
+        "Sistemas multiagente",
+        "Q-Learning"
+    ],
+    "lenguajes": [
+        "C/C++",
+        "Java",
+        "PL/SQL",
+        "Python",
+        "Haskell",
+        "MatLab",
+        "R",
+        "Bash/Shell",
+        "Netlogo"
+    ],
+    "herramientas": [
+        "Docker",
+        "Git",
+        "Linux",
+        "FastAPI",
+        "Flutter",
+        "Qt",
+        "MQTT",
+        "Raspberry Pi"
+    ],
+    "idiomas": [
+        "Español (Nativo)",
+        "Inglés (B1)"
+    ],
+    "softSkills": [
+        "Resolución de problemas",
+        "Trabajo en equipo",
+        "Proactividad",
+        "Adaptabilidad",
+        "Comunicación efectiva",
+        "Organización y gestión del tiempo",
+        "Pensamiento crítico",
+        "Creatividad"
+    ],
+    "otros": [
+        "Disponibilidad inmediata",
+        "Permiso de conducir B"
+    ]
+}

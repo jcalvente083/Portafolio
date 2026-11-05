@@ -1,0 +1,40 @@
+-- PROYECTOS (Datos/proyectos.json)
+El orden del fichero es el orden de la web: los 5 primeros salen en el carrusel de la portada.
+Solo "id", "titulo", "descripcion" y "tecnologias" son obligatorios; el resto se omite si está vacío.
+{
+    "id": "mi-proyecto",                       -> URL: detalle-proyecto.html?id=mi-proyecto
+    "titulo": "Mi Proyecto",
+    "descripcion": "Una frase que explique qué hace.",
+    "insignia": "Finalista Premios X",         -> insignia rosa con trofeo en tarjetas y cabecera
+    "contexto": "Trabajo Fin de Grado",        -> ficha del proyecto (barra lateral)
+    "anio": "2026",
+    "equipo": "Individual",
+    "reconocimiento": "Matrícula de Honor",
+    "contenido": ["Párrafo 1", "Párrafo 2"],   -> "Sobre el Proyecto"
+    "modulos": [ { "titulo": "Parte 1", "texto": "..." } ],   -> acordeones "Cómo Está Hecho"
+    "resultados": {                            -> tabla de resultados (o null)
+        "nota": "Explicación de la tabla",
+        "columnas": ["Modelo", "BA", "AUC"],
+        "filas": [["KNN", "0,833", "0,873"]],
+        "numericas": [1, 2],                   -> columnas alineadas a la derecha (desde 0)
+        "destacarMax": [1, 2]                  -> el valor más alto de esas columnas va en negrita
+    },
+    "imagen": "assets/img/mi-proyecto.webp",   -> fondo de la cabecera del detalle
+    "tecnologias": ["Python", "PyTorch"],
+    "demo": "url de la demo o vacío",
+    "notaDemo": "Aviso bajo el botón de la demo",
+    "repo": "url del repositorio o vacío",
+    "codigoProximamente": false                -> true: enlace "Código (próximamente)"
+}
+
+-- HABILIDADES (Datos/habilidades.json, carrusel de la portada)
+{
+    "nombre": "Docker",
+    "icono": "assets/icons/docker.svg",       -> imagen local o URL; o una clase de Font Awesome
+    "color": ""                                -> solo para iconos de Font Awesome
+}
+
+-- CURRÍCULUM (Datos/curriculum.json, página Sobre mí)
+premiosMenciones, formacionReglada, comunidad, formacionNoReglada y congresos son listas de:
+{ "fecha": "2026", "titulo": "...", "institucion": "...", "descripcion": "..." }
+iaMl, lenguajes, herramientas, idiomas, softSkills y otros son listas de textos.

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto en Desarrollo | Jesús D. Calvente</title>
+    <meta name="description" content="Este proyecto todavía está en desarrollo.">
+    <link rel="canonical" href="https://www.jcalvente083.qzz.io/proyecto_no_disponible.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Jesús David Calvente Zapata">
+    <meta property="og:title" content="Proyecto en Desarrollo | Jesús D. Calvente">
+    <meta property="og:description" content="Este proyecto todavía está en desarrollo.">
+    <meta property="og:url" content="https://www.jcalvente083.qzz.io/proyecto_no_disponible.html">
+    <meta property="og:image" content="https://www.jcalvente083.qzz.io/assets/img/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .construction-container {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        .icon-pulse {
+            font-size: 5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .construction-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="./index.html" class="logo">Jesús D. Calvente</a>
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <ul class="nav-links" id="menu-principal">
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./proyectos.html" class="active">Proyectos</a></li>
+            <li><a href="./sobremi.html">Sobre mí</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <main class="construction-container">
+        <div class="construction-card">
+            <i class="fas fa-laptop-code icon-pulse"></i>
+            <h1 style="margin-bottom: 1rem; font-size: 2.5rem;">¡Ups! Proyecto en <span class="highlight">Desarrollo</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6;">
+                Este proyecto todavía se está horneando. Estoy trabajando en él para tenerlo listo lo antes posible. ¡Vuelve pronto para ver el resultado final!
+            </p>
+            <button onclick="window.history.back()" class="btn">
+                <i class="fas fa-arrow-left"></i> Volver atrás
+            </button>
+        </div>
+    </main>
+
+    <footer id="contacto">
+        <h2>Contáctame</h2>
+        <p>¿Interesado en trabajar juntos? ¡Envíame un mensaje!</p>
+        <div class="socials">
+            <a href="mailto:jesus.calvente.zapata.24@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/jes%C3%BAs-david-calvente-zapata-0a914a242/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/jcalvente083" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> Jesús David Calvente Zapata.</p>
+    </footer>
+
+    <script src="scripts/scriptNavBar.js"></script>
+</body>
+</html>

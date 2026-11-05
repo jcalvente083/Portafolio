@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesús David Calvente Zapata | IA y Machine Learning</title>
+    <meta name="description" content="Portafolio de Jesús David Calvente Zapata, estudiante de Ingeniería Informática (Universidad de Huelva). Proyectos de IA: detección de Parkinson por voz, agentes inteligentes y visión en el edge.">
+    <link rel="canonical" href="https://www.jcalvente083.qzz.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Jesús David Calvente Zapata">
+    <meta property="og:title" content="Jesús David Calvente Zapata | IA y Machine Learning">
+    <meta property="og:description" content="Portafolio de Jesús David Calvente Zapata, estudiante de Ingeniería Informática (Universidad de Huelva). Proyectos de IA: detección de Parkinson por voz, agentes inteligentes y visión en el edge.">
+    <meta property="og:url" content="https://www.jcalvente083.qzz.io/">
+    <meta property="og:image" content="https://www.jcalvente083.qzz.io/assets/img/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="./index.html" class="logo">Jesús D. Calvente</a>
+        
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        
+        <ul class="nav-links" id="menu-principal">
+            <li><a href="./index.html" class="active" style="color: var(--primary);">Inicio</a></li>
+            <li><a href="./proyectos.html">Proyectos</a></li>
+            <li><a href="./sobremi.html">Sobre mí</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Hola, soy <span class="highlight">Jesús D.</span></h1>
+            <h3>Estudiante de Ingeniería Informática especializado en IA y Machine Learning</h3>
+
+            <div class="hero-badges">
+                <span><i class="fas fa-trophy"></i> Finalista IV Premios Sopra Steria</span>
+                <span><i class="fas fa-graduation-cap"></i> TFG con Matrícula de Honor</span>
+                <span><i class="fas fa-users"></i> Colaborador de FORMA26</span>
+            </div>
+            
+            <div class="hero-text-limit">
+                <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">
+                    Soy estudiante de <strong style="color: var(--primary);">Ingeniería Informática</strong> en la Universidad de Huelva,
+                    apasionado por la Inteligencia Artificial, el Machine Learning y los Agentes Inteligentes.
+                    Mi TFG, <strong>Cortex-AI</strong>, detecta indicios de Parkinson a partir de la voz con una AUC de hasta 0,94
+                    en pacientes que el modelo nunca había visto: obtuvo <strong>Matrícula de Honor</strong> y fue
+                    <strong>finalista de los IV Premios Sopra Steria</strong> a los mejores TFG en IA de Andalucía.
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 3rem;">
+                    Disfruto descubriendo cosas nuevas y creo firmemente que <strong>disfrutar del proceso</strong> 
+                    es tan importante como alcanzar la meta. Explorar tecnologías innovadoras y resolver 
+                    problemas complejos es lo que me motiva cada día.
+                </p>
+            </div>
+
+            <div class="hero-btns" style="margin-top: 2rem;">
+                <a href="proyectos.html" class="btn">Ver Proyectos</a>
+                <a href="sobremi.html" class="btn btn-outline">
+                 Ver Currículum
+                </a>
+                <a href="https://github.com/jcalvente083" target="_blank" rel="noopener" class="btn">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos" class="container carousel-section">
+        <h2>Mis Proyectos</h2>
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="contenedor-proyectos">
+                </div>
+        </div>
+    </section>
+
+    <section id="habilidades" class="container bg-light carousel-section">
+        <h2>Habilidades Técnicas</h2>
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="contenedor-habilidades">
+                </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <h2>Contáctame</h2>
+        <p>¿Interesado en trabajar juntos? ¡Envíame un mensaje!</p>
+        <div class="socials">
+            <a href="mailto:jesus.calvente.zapata.24@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/jes%C3%BAs-david-calvente-zapata-0a914a242/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/jcalvente083" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> Jesús David Calvente Zapata.</p>
+    </footer>
+
+    <script src="scripts/comun.js"></script>
+    <script src="scripts/scriptsProyectos.js"></script>
+    <script src="scripts/scriptsHabilidades.js"></script>
+    <script src="scripts/scriptNavBar.js"></script>
+</body>
+</html>

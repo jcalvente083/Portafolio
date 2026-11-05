@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.jcalvente083.qzz.io/sitemap.xml

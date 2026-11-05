@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre mí | Jesús D. Calvente</title>
+    <meta name="description" content="Trayectoria de Jesús David Calvente Zapata: premios, formación en Ingeniería Informática, cursos, congresos y habilidades en Inteligencia Artificial.">
+    <link rel="canonical" href="https://www.jcalvente083.qzz.io/sobremi.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Jesús David Calvente Zapata">
+    <meta property="og:title" content="Sobre mí | Jesús D. Calvente">
+    <meta property="og:description" content="Trayectoria de Jesús David Calvente Zapata: premios, formación en Ingeniería Informática, cursos, congresos y habilidades en Inteligencia Artificial.">
+    <meta property="og:url" content="https://www.jcalvente083.qzz.io/sobremi.html">
+    <meta property="og:image" content="https://www.jcalvente083.qzz.io/assets/img/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="./index.html" class="logo">Jesús D. Calvente</a>
+
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links" id="menu-principal">
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./proyectos.html">Proyectos</a></li>
+            <li><a href="./sobremi.html" class="active" style="color: var(--primary);">Sobre mí</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+
+
+    </nav>
+    <header style="text-align: center; padding: 120px 20px 40px;">
+        <h1>Conoce más <span class="highlight">Sobre Mí</span></h1>
+
+        <div class="profile-photo-container">
+            <div class="about-image-wrapper">
+                <img src="assets/mi_foto.webp" alt="Foto de Jesús David Calvente Zapata" id="profile-img" width="480" height="480">
+            </div>
+        </div>
+
+        <div class="bio-text">
+            <p>
+                Soy estudiante de <strong>Ingeniería Informática</strong> en la Universidad de Huelva, con especialización en Computación,
+                y un apasionado de la Inteligencia Artificial, el Machine Learning y la resolución de problemas complejos.
+                Me encanta aprender constantemente y aplicar la tecnología para crear soluciones innovadoras.
+            </p>
+            <p style="margin-top: 1rem;">
+                En mi TFG, <strong>Cortex-AI</strong>, llevé modelos propios de detección de Parkinson por voz hasta una app móvil
+                y un dispositivo embebido; obtuvo <strong>Matrícula de Honor</strong> y fue finalista de los IV Premios Sopra Steria.
+                Además de programar, me implico en la comunidad: tras participar en FORMA25, colaboré en FORMA26.
+            </p>
+        </div>
+
+        <div class="social-bubbles">
+            <a href="https://www.linkedin.com/in/jes%C3%BAs-david-calvente-zapata-0a914a242/" target="_blank" rel="noopener noreferrer"
+                class="social-bubble linkedin" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/jcalvente083" target="_blank" rel="noopener noreferrer"
+                class="social-bubble github" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:jesus.calvente.zapata.24@gmail.com" class="social-bubble email" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <main style="padding-bottom: 4rem;">
+
+        <p id="aviso-cv" hidden style="text-align:center; color: var(--text-muted); padding: 2rem 5%;">No se ha podido cargar el currículum. Puedes descargarlo en PDF más abajo.</p>
+
+        <section class="container cv-section">
+            <h2>Premios y Menciones</h2>
+            <div class="cv-grid" id="grid-premios-menciones">
+            </div>
+        </section>
+
+        <section class="container cv-section bg-light" style="padding-top: 4rem; padding-bottom: 4rem;">
+            <h2>Formación Reglada</h2>
+            <div class="cv-grid" id="grid-formacion-reglada">
+            </div>
+        </section>
+
+        <section class="container cv-section">
+            <h2>Organización y Comunidad</h2>
+            <div class="cv-grid" id="grid-comunidad">
+            </div>
+        </section>
+
+        <section class="container cv-section bg-light" style="padding-top: 4rem; padding-bottom: 4rem;">
+            <h2>Cursos y Certificaciones</h2>
+            <div class="cv-grid" id="grid-formacion-noreglada">
+            </div>
+        </section>
+
+        <section class="container cv-section">
+            <h2>Congresos</h2>
+            <div class="cv-grid" id="grid-congresos">
+            </div>
+        </section>
+
+        <section class="container cv-section bg-light" style="padding-top: 4rem; padding-bottom: 4rem;">
+            <h2>Mis Habilidades</h2>
+            <div class="skills-flex-container">
+
+                <div class="skills-column">
+                    <div class="skills-header"><i class="fas fa-brain"></i> IA y Machine Learning</div>
+                    <div class="skills-list" id="list-iaml"></div>
+                </div>
+
+                <div class="skills-column">
+                    <div class="skills-header"><i class="fas fa-code"></i> Lenguajes de Programación</div>
+                    <div class="skills-list" id="list-lenguajes"></div>
+                </div>
+
+                <div class="skills-column">
+                    <div class="skills-header"><i class="fas fa-screwdriver-wrench"></i> Herramientas y Despliegue</div>
+                    <div class="skills-list" id="list-herramientas"></div>
+                </div>
+
+                <div class="skills-column">
+                    <div class="skills-header"><i class="fas fa-language"></i> Idiomas</div>
+                    <div class="skills-list" id="list-idiomas"></div>
+                </div>
+
+                <div class="skills-column">
+                    <div class="skills-header"><i class="fas fa-users"></i> Soft Skills</div>
+                    <div class="skills-list" id="list-softskills"></div>
+                </div>
+
+                <div class="skills-column">
+                    <div class="skills-header"><i class="fas fa-circle-info"></i> Otros Datos</div>
+                    <div class="skills-list" id="list-otros"></div>
+                </div>
+
+                
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="assets/cv_jesus_calvente.pdf" target="_blank" rel="noopener" class="btn"
+                style="padding: 15px 30px; font-size: 1.1rem;">
+                <i class="fas fa-file-pdf"></i> Descargar Currículum en PDF
+            </a>
+        </div>
+    </main>
+
+    
+
+
+    <footer id="contacto">
+        <h2>Contáctame</h2>
+        <p>¿Interesado en trabajar juntos? ¡Envíame un mensaje!</p>
+        <div class="socials">
+            <a href="mailto:jesus.calvente.zapata.24@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/jes%C3%BAs-david-calvente-zapata-0a914a242/" target="_blank" rel="noopener" aria-label="LinkedIn"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/jcalvente083" target="_blank" rel="noopener" aria-label="GitHub"><i
+                    class="fab fa-github"></i></a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> Jesús David Calvente Zapata.</p>
+    </footer>
+    <script src="scripts/comun.js"></script>
+    <script src="scripts/scriptSobreMi.js"></script>
+    <script src="scripts/scriptNavBar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos | Jesús D. Calvente</title>
+    <meta name="description" content="Todos los proyectos de Inteligencia Artificial de Jesús David Calvente Zapata: modelos de voz, agentes inteligentes, búsqueda, simulación multiagente y visión en el edge.">
+    <link rel="canonical" href="https://www.jcalvente083.qzz.io/proyectos.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Jesús David Calvente Zapata">
+    <meta property="og:title" content="Proyectos | Jesús D. Calvente">
+    <meta property="og:description" content="Todos los proyectos de Inteligencia Artificial de Jesús David Calvente Zapata: modelos de voz, agentes inteligentes, búsqueda, simulación multiagente y visión en el edge.">
+    <meta property="og:url" content="https://www.jcalvente083.qzz.io/proyectos.html">
+    <meta property="og:image" content="https://www.jcalvente083.qzz.io/assets/img/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="./index.html" class="logo">Jesús D. Calvente</a>
+        
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        
+        <ul class="nav-links" id="menu-principal">
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./proyectos.html" class="active">Proyectos</a></li>
+            <li><a href="./sobremi.html">Sobre mí</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header style="text-align: center; padding: 120px 20px 40px;">
+        <h1>Explora mi <span class="highlight">Trabajo</span></h1>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto;">
+            Todos mis proyectos de Inteligencia Artificial: modelos de voz, agentes inteligentes, búsqueda, simulación y visión en el edge. Pulsa en cualquiera para ver los detalles y los resultados.
+        </p>
+
+        <div class="filter-wrapper">
+            <div class="custom-select" id="custom-select">
+                
+                <div class="select-trigger" id="select-trigger" onclick="toggleSelect()" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                    <span id="current-selection">Filtrar por Tecnología</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+
+                <div class="select-options">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="tech-search" placeholder="Buscar..." aria-label="Buscar tecnología" oninput="filtrarOpcionesDropdown()">
+                    </div>
+                    
+                    <div class="options-list" id="options-list" role="listbox" aria-label="Tecnologías">
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="container" style="padding-top: 20px;">
+        <div id="grid-proyectos" class="projects-grid">
+            <p style="text-align: center; color: var(--text-muted);">Cargando proyectos...</p>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <h2>Contáctame</h2>
+        <p>¿Interesado en trabajar juntos? ¡Envíame un mensaje!</p>
+        <div class="socials">
+            <a href="mailto:jesus.calvente.zapata.24@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/jes%C3%BAs-david-calvente-zapata-0a914a242/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/jcalvente083" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        <p class="copyright">&copy; <span id="year"></span> Jesús David Calvente Zapata.</p>
+    </footer>
+
+
+    <script src="scripts/comun.js"></script>
+    <script src="scripts/scriptTodosProyectos.js"></script>
+    <script src="scripts/scriptNavBar.js"></script>
+</body>
+</html>

@@ -1,0 +1,747 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN BÁSICA
+   ========================================= */
+:root {
+    --primary: #3b82f6;      /* Azul brillante */
+    --secondary: #ec4899;    /* Rosa/Magenta */
+    --dark: #0f172a;         /* Fondo base oscuro */
+    --card-bg: rgba(30, 41, 59, 0.7); /* Fondo tarjetas con transparencia */
+    --text: #f1f5f9;         /* Texto principal */
+    --text-muted: #94a3b8;   /* Texto secundario */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+html { scroll-behavior: smooth; }
+
+body { 
+    background-color: var(--dark); 
+    color: var(--text); 
+    line-height: 1.6; 
+    overflow-x: hidden; 
+    position: relative; 
+    min-height: 100vh;
+}
+
+/* --- FONDO CON LUCES (GLOW FIJO) --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 85% 60%, rgba(236, 72, 153, 0.25) 0%, transparent 45%);
+}
+
+/* =========================================
+   2. NAVEGACIÓN (NAVBAR)
+   ========================================= */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 5%; 
+    background: rgba(15, 23, 42, 0.85); 
+    backdrop-filter: blur(12px); 
+    position: sticky; top: 0; z-index: 1000; 
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+}
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
+.nav-links a.active { color: var(--primary); font-weight: bold; }
+
+/* Menú Móvil */
+.menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.bar { width: 25px; height: 3px; background-color: var(--text); transition: 0.3s; }
+.menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
+.hero {
+    min-height: 90vh; 
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; 
+    padding: 120px 20px 50px; 
+}
+.hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+.highlight { 
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero h3 { margin-bottom: 2rem; padding: 0 10px; font-weight: 400; }
+
+.hero-text-limit {
+    width: 90%; 
+    max-width: 700px; 
+    margin: 0 auto; 
+}
+
+/* Botones */
+.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; background: var(--primary);
+    color: white; text-decoration: none; border-radius: 6px; font-weight: bold;
+    transition: 0.3s; margin: 5px; border: none; cursor: pointer;
+}
+.btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4); }
+
+/* =========================================
+   4. CARRUSELES (LÓGICA INFINITA)
+   ========================================= */
+.container { padding: 5rem 0; width: 100%; overflow: hidden; position: relative; }
+h2 { text-align: center; margin-bottom: 3rem; font-size: 2.2rem; position: relative; z-index: 2; }
+h2::after {
+    content: ''; display: block; width: 50px; height: 3px;
+    background: var(--primary); margin: 10px auto 0;
+}
+
+.carousel-wrapper {
+    overflow: hidden; width: 100%; position: relative;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.carousel-track {
+    display: flex; 
+    gap: 2rem; 
+    width: max-content; 
+    padding: 20px 0;
+    /* ANIMACIÓN PAUSADA POR DEFECTO (JS la activa) */
+    animation: scroll 40s linear infinite; 
+    animation-play-state: paused; 
+    will-change: transform; 
+}
+
+/* JS añade esta clase cuando todo está listo */
+.carousel-track.is-loaded {
+    animation-play-state: running;
+}
+
+.carousel-track:hover { animation-play-state: paused; }
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+/* =========================================
+   5. TARJETAS (Glassmorphism)
+   ========================================= */
+.project-card, .skill-card {
+    background: var(--card-bg); 
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.project-card:hover, .skill-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Proyectos (Estilos generales) */
+.project-card {
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 2rem; white-space: normal;
+}
+/* En el carrusel tienen un ancho fijo */
+.carousel-track .project-card {
+    flex: 0 0 350px; max-width: 350px;
+}
+
+.project-card h3 { margin-bottom: 1rem; color: var(--primary); font-size: 1.3rem; }
+.project-card p { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.95rem; }
+
+.tech-stack { margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-stack span {
+    background: rgba(51, 65, 85, 0.5); color: #e2e8f0; 
+    padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.1);
+}
+.links a { color: var(--primary); text-decoration: none; font-weight: bold; margin-right: 15px; font-size: 0.9rem; }
+
+
+/* --- TARJETA "VER MÁS" (DISEÑO CÍRCULO) --- */
+a.project-card.view-more-card {
+    text-decoration: none; 
+    cursor: pointer;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: 1.5rem; 
+    background: rgba(59, 130, 246, 0.1); 
+    border: 2px dashed var(--primary);
+    text-align: center;
+}
+
+.view-more-icon-circle {
+    width: 80px; height: 80px;
+    background-color: #ffffff; 
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-more-icon-circle i {
+    font-size: 2rem;
+    color: var(--primary); 
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+}
+
+.view-more-content h3 {
+    margin: 0; font-size: 1.5rem; color: var(--text);
+    font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+}
+.view-more-content p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 1rem; }
+
+/* Hover View More */
+a.project-card.view-more-card:hover {
+    background: var(--primary); border-color: transparent; transform: translateY(-5px);
+}
+a.project-card.view-more-card:hover .view-more-icon-circle {
+    transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+a.project-card.view-more-card:hover .view-more-icon-circle i {
+    color: var(--primary); transform: rotate(0deg);
+}
+a.project-card.view-more-card:hover .view-more-content h3,
+a.project-card.view-more-card:hover .view-more-content p { color: white; }
+
+
+/* Habilidades */
+.bg-light { background-color: rgba(255, 255, 255, 0.02); } 
+.carousel-track .skill-card {
+    flex: 0 0 160px; max-width: 160px;
+    padding: 2rem 1rem; text-align: center;
+}
+.skill-card i { font-size: 3rem; margin-bottom: 1rem; display: block; color: var(--text); }
+.skill-card:hover i { color: var(--primary); transform: scale(1.1); }
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+footer { 
+    text-align: center; padding: 4rem 2rem; 
+    background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(51, 65, 85, 0.5); 
+}
+.socials a { color: var(--text-muted); font-size: 1.8rem; margin: 0 15px; transition: 0.3s; }
+.socials a:hover { color: var(--primary); }
+
+/* =========================================
+   7. PÁGINA DE TODOS LOS PROYECTOS (GRID)
+   ========================================= */
+.projects-grid {
+    display: grid;
+    /* 4 COLUMNAS FIJAS EN PANTALLAS GRANDES */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 3rem; /* Separación amplia */
+    padding: 2rem 5%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.projects-grid .project-card {
+    height: 100%; 
+    cursor: pointer;
+    position: relative;
+    display: flex; flex-direction: column; 
+}
+
+/* Icono flotante al pasar el ratón */
+.projects-grid .project-card::after {
+    content: " \f061";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 20px; right: 20px;
+    opacity: 0; color: var(--primary);
+    transition: opacity 0.3s, transform 0.3s;
+}
+.projects-grid .project-card:hover::after {
+    opacity: 1; transform: translateX(5px);
+}
+
+/* =========================================
+   8. RESPONSIVE
+   ========================================= */
+/* Tablet grande / Laptop pequeña: bajamos a 3 columnas */
+@media (max-width: 1300px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Tablet normal: bajamos a 2 columnas */
+@media (max-width: 900px) {
+    .hero h1 { font-size: 2.5rem; }
+    
+    /* Grid de proyectos */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Móvil: menú hamburguesa y 1 sola columna */
+@media (max-width: 768px) {
+    /* Menú */
+    .menu-toggle { display: flex; z-index: 1001; }
+    .nav-links {
+        position: fixed; top: 0; right: -100%; height: 100vh; width: 75%;
+        background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(15px);
+        flex-direction: column; justify-content: center; align-items: center;
+        transition: 0.4s; border-left: 1px solid #334155;
+    }
+    .nav-links.active { right: 0; }
+    
+    /* Hero y Carrusel */
+    .hero-text-limit { width: 100%; padding: 0 15px; }
+    .carousel-track .project-card { flex: 0 0 300px; padding: 1.5rem; }
+    .carousel-track .skill-card { flex: 0 0 140px; }
+
+    /* Grid de proyectos en móvil (1 columna) */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 2rem;
+    }
+} 
+
+/* =========================================
+   9. ACORDEONES (DESPLEGABLES)
+   ========================================= */
+.accordion-container {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+}
+
+.accordion-item {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover { border-color: var(--primary); }
+
+.accordion-header {
+    width: 100%; padding: 1.2rem;
+    background: transparent; border: none; outline: none;
+    text-align: left; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--text); font-size: 1.1rem; font-weight: 600;
+}
+
+.accordion-header i { color: var(--primary); transition: transform 0.3s ease; }
+.accordion-item.active .accordion-header i { transform: rotate(180deg); }
+.accordion-item.active { background: rgba(30, 41, 59, 0.9); border-color: var(--primary); }
+
+.accordion-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 1.2rem; color: var(--text-muted);
+    font-size: 1rem; line-height: 1.6;
+}
+.accordion-item.active .accordion-body { padding-bottom: 1.2rem; }
+
+
+/* =========================================
+   10. FILTRO DESPLEGABLE (CUSTOM SELECT)
+   ========================================= */
+.filter-wrapper {
+    display: flex; justify-content: center; width: 100%;
+}
+
+.custom-select {
+    position: relative; width: 300px;
+    font-size: 1rem; color: var(--text);
+}
+
+/* El botón principal */
+.select-trigger {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 20px; border-radius: 8px;
+    cursor: pointer; transition: all 0.3s;
+    user-select: none;
+}
+
+.select-trigger:hover {
+    border-color: var(--primary);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.select-trigger i { transition: transform 0.3s; }
+.custom-select.open .select-trigger i { transform: rotate(180deg); }
+
+/* Menú desplegable */
+.select-options {
+    position: absolute; top: 110%; left: 0; width: 100%;
+    background: #0f172a; /* Fondo sólido */
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    opacity: 0; visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000; overflow: hidden;
+}
+
+.custom-select.open .select-options {
+    opacity: 1; visibility: visible; transform: translateY(0);
+}
+
+/* Buscador */
+.search-box {
+    padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; gap: 10px;
+}
+.search-box input {
+    width: 100%; background: transparent; border: none;
+    color: white; outline: none; font-size: 0.95rem;
+}
+.search-box i { color: var(--text-muted); }
+
+/* Lista */
+.options-list { max-height: 250px; overflow-y: auto; }
+.options-list::-webkit-scrollbar { width: 5px; }
+.options-list::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+
+.option {
+    padding: 10px 15px; cursor: pointer; transition: background 0.2s; display: block;
+}
+.option:hover { background: rgba(59, 130, 246, 0.2); color: var(--primary); }
+.option.selected { background: var(--primary); color: white; }
+
+/* =========================================
+   11. PÁGINA SOBRE MÍ (CURRÍCULUM DINÁMICO)
+   ========================================= */
+
+/* Foto y Bio */
+.profile-photo-container {
+    display: flex; justify-content: center; align-items: center;
+    margin: 2rem 0;
+}
+.about-image-wrapper {
+    width: 220px; height: 220px;
+    border-radius: 50%; padding: 8px;
+    background: var(--card-bg); border: 2px solid var(--primary);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(8px);
+}
+.about-image-wrapper img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.bio-text {
+    max-width: 800px; margin: 0 auto;
+    color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;
+}
+
+/* Grids del CV */
+.cv-section { margin-bottom: 2rem; }
+.cv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 5%;
+}
+
+/* Tarjetas de Formación */
+.cv-card {
+    background: var(--card-bg); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.cv-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+/* Línea lateral decorativa */
+.cv-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%; background: var(--primary);
+}
+
+.cv-card .date {
+    display: inline-block; background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa; padding: 4px 12px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: bold; margin-bottom: 1rem;
+}
+.cv-card h3 { color: var(--text); font-size: 1.3rem; margin-bottom: 0.5rem; }
+.cv-card h4 { color: var(--text-muted); font-size: 1rem; font-weight: 400; margin-bottom: 1rem; }
+.cv-card p { font-size: 0.95rem; color: #cbd5e1; }
+
+/* Columnas de Habilidades */
+.skills-flex-container {
+    display: flex; flex-wrap: wrap; gap: 2rem; 
+    max-width: 1200px; margin: 0 auto; padding: 0 5%;
+}
+.skills-column {
+    flex: 1; min-width: 300px;
+    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 2rem;
+}
+.skills-header {
+    color: var(--primary); font-size: 1.2rem; font-weight: bold;
+    margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem; display: flex; align-items: center; gap: 10px;
+}
+.skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.skills-list span {
+    background: rgba(51, 65, 85, 0.6); border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; transition: 0.3s;
+}
+.skills-list span:hover { background: var(--primary); color: white; border-color: transparent; }
+
+/* --- REDES SOCIALES (GLOBITOS) EN SOBRE MÍ --- */
+.social-bubbles {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 1.5rem;
+}
+
+.social-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.social-bubble:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Colores de marca al pasar el ratón */
+.social-bubble.linkedin:hover { background: #0077b5; border-color: #0077b5; color: white; }
+.social-bubble.github:hover { background: #ffffff; border-color: #ffffff; color: #111; }
+.social-bubble.email:hover { background: #ea4335; border-color: #ea4335; color: white; }
+
+
+/* =========================================
+   12. PÁGINA DE CONTACTO
+   ========================================= */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* Tarjetas de Información */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.info-card i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.info-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: var(--text);
+}
+
+.info-card p, .info-card a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.info-card a:hover {
+    color: var(--primary);
+}
+
+/* Formulario */
+.contact-form-wrapper {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .contact-form-wrapper {
+        padding: 2rem;
+    }
+}
+
+/* --- MODAL DE ÉXITO (CONTACTO) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2000; 
+    opacity: 0; visibility: hidden; 
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1; visibility: visible;
+}
+
+.modal-content {
+    background: var(--card-bg); border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 15px; padding: 3rem 2rem; text-align: center;
+    max-width: 450px; width: 90%; 
+    transform: translateY(-30px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-icon {
+    font-size: 4.5rem; color: #10b981; /* Verde esmeralda de éxito */ 
+    margin-bottom: 1rem;
+}
+/* =========================================
+   13. AÑADIDOS (misma estética, mejoras de contenido y accesibilidad)
+   ========================================= */
+.logo { text-decoration: none; }
+button.menu-toggle { background: none; border: 0; padding: 6px; }
+
+/* Foco visible al navegar con teclado */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
+.project-card:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--primary); outline-offset: 3px;
+}
+
+/* Logros destacados bajo el titular de la portada */
+.hero-badges {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    max-width: 900px; margin: -0.5rem auto 2rem;
+}
+.hero-badges span {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #bfdbfe; padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;
+}
+.hero-badges i { color: var(--secondary); }
+
+/* Insignia de premio en tarjetas y en el detalle */
+.card-badge {
+    display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+    background: rgba(236, 72, 153, 0.15); color: #f9a8d4;
+    border: 1px solid rgba(236, 72, 153, 0.35);
+    padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Contexto (asignatura, TFG...) en las tarjetas del catálogo */
+.project-card p.card-context { margin: -0.5rem 0 0.8rem; font-size: 0.85rem; color: #60a5fa; }
+.project-card p.card-context i { margin-right: 4px; }
+
+/* Tarjetas clicables en los carruseles */
+.carousel-track .project-card[data-id] { cursor: pointer; }
+.links a { display: inline-block; margin-bottom: 6px; }
+
+/* Quien prefiera menos movimiento ve los carruseles quietos y desplazables */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .carousel-track { animation: none !important; }
+    .carousel-wrapper { overflow-x: auto; }
+    .carousel-track > [aria-hidden="true"] { display: none; }
+}
+
+/* El menú móvil oculto ya no ensancha la página (antes permitía desplazarse en horizontal) */
+@media (max-width: 768px) {
+    .nav-links {
+        right: 0; transform: translateX(100%); visibility: hidden;
+        transition: transform 0.4s, visibility 0.4s;
+    }
+    .nav-links.active { right: 0; transform: none; visibility: visible; }
+}
+html { overflow-x: clip; }

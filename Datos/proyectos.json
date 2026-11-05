@@ -1,0 +1,421 @@
+[
+    {
+        "id": "CortexAI",
+        "titulo": "Cortex-AI",
+        "descripcion": "Detección precoz del Parkinson a partir de la voz: de las grabaciones clínicas a una app móvil con modelos propios.",
+        "insignia": "Finalista Premios Sopra Steria",
+        "contexto": "Trabajo Fin de Grado en Ingeniería Informática",
+        "anio": "2026",
+        "equipo": "Individual",
+        "reconocimiento": "Calificación de 10 con Matrícula de Honor. Finalista de los IV Premios Sopra Steria a los mejores TFG en Inteligencia Artificial de Andalucía.",
+        "contenido": [
+            "Cortex-AI es un sistema de apoyo a la decisión clínica que estima el riesgo de enfermedad de Parkinson a partir de grabaciones de voz. Une el procesamiento digital de la señal con la utilidad clínica: una app móvil para el personal médico y un backend de inferencia que corre en una Raspberry Pi 5.",
+            "Procesa tres tareas vocales (vocales sostenidas, frases leídas y habla espontánea) y compara varias arquitecturas de aprendizaje automático. Cada predicción llega con una explicación de qué rasgos de la voz la han motivado."
+        ],
+        "modulos": [
+            {
+                "titulo": "Datos y evaluación",
+                "texto": "4.032 grabaciones de 207 personas, combinando los corpus NeuroVoz y PC-GITA. La partición 80/20 se hace por paciente, así que ninguna persona aparece a la vez en entrenamiento y en test: los resultados miden cómo se comporta el sistema con pacientes nuevos."
+            },
+            {
+                "titulo": "Tres familias de modelos",
+                "texto": "Medidas acústicas de uso clínico (jitter, shimmer, HNR, CPPS) extraídas con Praat y clasificadas con KNN y XGBoost; mel-espectrogramas con redes ResNet y transfer learning; y embeddings de Wav2Vec2 (XLSR-53), congelados o con fine-tuning completo."
+            },
+            {
+                "titulo": "Control del sesgo de edad",
+                "texto": "En NeuroVoz los pacientes tienen de media unos siete años más que los controles, así que un modelo podría aprender a detectar la edad en lugar de la enfermedad. El modelo en producción no usa variables demográficas, y los modelos profundos se evaluaron también con emparejamiento por edad."
+            },
+            {
+                "titulo": "Explicabilidad",
+                "texto": "SHAP para XGBoost, Grad-CAM sobre el espectrograma para las ResNet y la desviación de cada característica respecto a la población para KNN. La app muestra estas explicaciones junto al nivel de riesgo."
+            },
+            {
+                "titulo": "Despliegue",
+                "texto": "API en FastAPI dentro de Docker sobre una Raspberry Pi 5 con los modelos ligeros, y los modelos Wav2Vec2 servidos en GPU serverless (Modal). La app, en Flutter para iOS y Android, guía las tres grabaciones y muestra el resultado."
+            }
+        ],
+        "resultados": {
+            "nota": "Resultados en un holdout externo: el 20 % de los pacientes, nunca vistos durante el entrenamiento. BA es la balanced accuracy, robusta al desequilibrio de clases.",
+            "columnas": [
+                "Modelo",
+                "Tarea",
+                "Usa edad",
+                "BA",
+                "AUC"
+            ],
+            "filas": [
+                [
+                    "Wav2Vec2 + XGBoost",
+                    "Frase",
+                    "Sí",
+                    "0,857",
+                    "0,939"
+                ],
+                [
+                    "ResNet10 sobre mel-espectrograma",
+                    "Todas",
+                    "Sí",
+                    "0,833",
+                    "0,868"
+                ],
+                [
+                    "KNN acústico (en producción)",
+                    "Frase",
+                    "No",
+                    "0,833",
+                    "0,873"
+                ],
+                [
+                    "Wav2Vec2 + KNN",
+                    "Todas",
+                    "Sí",
+                    "0,810",
+                    "0,943"
+                ]
+            ],
+            "numericas": [
+                3,
+                4
+            ],
+            "destacarMax": [
+                3,
+                4
+            ]
+        },
+        "imagen": "assets/img/cortex-ai.webp",
+        "tecnologias": [
+            "Python",
+            "PyTorch",
+            "CUDA",
+            "scikit-learn",
+            "XGBoost",
+            "Wav2Vec2",
+            "librosa",
+            "Praat",
+            "SHAP",
+            "Grad-CAM",
+            "FastAPI",
+            "Docker",
+            "Raspberry Pi 5",
+            "Modal",
+            "Flutter"
+        ],
+        "demo": "",
+        "notaDemo": "",
+        "repo": "https://github.com/jcalvente083/Cortex-AI",
+        "codigoProximamente": false
+    },
+    {
+        "id": "uav",
+        "titulo": "UAV: detección en el edge",
+        "descripcion": "Software de a bordo para dron que detecta objetos con YOLOv8n en CPU y envía vídeo, telemetría y detecciones a una estación de tierra.",
+        "insignia": "",
+        "contexto": "",
+        "anio": "2026",
+        "equipo": "Individual",
+        "reconocimiento": "",
+        "contenido": [
+            "Dos sistemas independientes que se comunican mediante un contrato de red común. El software de a bordo captura vídeo, detecta objetos con YOLOv8n sobre ONNX Runtime y envía la telemetría (batería, velocidad, altura, GPS y detecciones) por UDP, TCP o MQTT, y el vídeo como JPEG por UDP.",
+            "La estación de tierra, escrita en Qt 6, recibe ambos flujos y muestra el vídeo con las cajas de detección superpuestas y la telemetría en directo."
+        ],
+        "modulos": [
+            {
+                "titulo": "Arquitectura hexagonal",
+                "texto": "El núcleo solo depende de cinco puertos (interfaces). Cambiar de modelo, de cámara o de protocolo de transporte no obliga a tocar el bucle principal; basta con escribir otro adaptador."
+            },
+            {
+                "titulo": "Pensado para hardware limitado",
+                "texto": "Todo corre en un único hilo, pensado para medio núcleo de CPU y para un posible paso a un RTOS. La inferencia se lanza como mucho cada 100 ms mientras el vídeo se mantiene a 20 fps, con NMS por clase. Reducir la entrada de 640 a 480 px recortó la latencia de inferencia entre un 40 y un 50 %; la cuantización a INT8 se probó y se descartó porque no mejoraba lo suficiente latencia ni memoria."
+            },
+            {
+                "titulo": "Despliegue",
+                "texto": "Imagen Docker de dos fases para amd64 y arm64, probada con límites de 0,5 CPU y 256 MB de memoria para simular el ordenador de a bordo, y validada en ARM64 mediante emulación con QEMU. El código está documentado con Doxygen."
+            }
+        ],
+        "resultados": {
+            "nota": "Datos clave del sistema de a bordo.",
+            "columnas": [
+                "Medida",
+                "Valor"
+            ],
+            "filas": [
+                [
+                    "Vídeo enviado a tierra",
+                    "20 fps"
+                ],
+                [
+                    "Intervalo mínimo entre inferencias",
+                    "100 ms"
+                ],
+                [
+                    "Latencia al bajar la entrada de 640 a 480 px",
+                    "−40 a −50 %"
+                ],
+                [
+                    "Recursos en la prueba con Docker",
+                    "0,5 CPU, 256 MB"
+                ]
+            ],
+            "numericas": [
+                1
+            ],
+            "destacarMax": []
+        },
+        "imagen": "assets/img/uav.webp",
+        "tecnologias": [
+            "C++17",
+            "YOLOv8n",
+            "ONNX Runtime",
+            "OpenCV",
+            "Qt 6",
+            "MQTT",
+            "Docker"
+        ],
+        "demo": "",
+        "notaDemo": "",
+        "repo": "https://github.com/jcalvente083/UAV",
+        "codigoProximamente": false
+    },
+    {
+        "id": "gvgenius-ai",
+        "titulo": "GVGenius",
+        "descripcion": "Cuatro agentes que juegan a videojuegos del framework GVGAI, cada uno con una técnica distinta de IA clásica.",
+        "insignia": "",
+        "contexto": "Prácticas de Sistemas Inteligentes, Universidad de Huelva",
+        "anio": "2025",
+        "equipo": "Individual",
+        "reconocimiento": "",
+        "contenido": [
+            "GVGenius parte del framework de la competición GVGAI, donde un agente tiene que jugar a videojuegos que no conoce de antemano. En lugar de usar redes neuronales, explora los límites de la IA tradicional y de la búsqueda en espacios de estados: cada juego se resuelve con una técnica distinta.",
+            "Incluye un lanzador gráfico propio para elegir juego y nivel y ver jugar al agente, y una demo que se ejecuta en el navegador."
+        ],
+        "modulos": [
+            {
+                "titulo": "Bait (juego 4): planificación STRIPS",
+                "texto": "El agente genera un plan completo antes de moverse. Sus operadores (mover el avatar, empujar piedras, tapar agujeros y coger la llave) tienen precondiciones y efectos definidos, y el planificador encadena los que llevan a la meta. Resuelve los niveles 0 y 1; en los superiores la complejidad crece demasiado."
+            },
+            {
+                "titulo": "Catapults (juego 16): búsqueda A*",
+                "texto": "Búsqueda en el espacio de estados con una heurística propia que tiene en cuenta la distancia al objetivo y los obstáculos, y que guía al agente sin caer en ciclos ni en caminos subóptimos."
+            },
+            {
+                "titulo": "Infection (juego 53): árbol de decisión",
+                "texto": "En cada turno, un árbol de decisión comprueba si el agente está infectado, si hay enfermeras y a qué distancia, o si hay una puerta, y elige entre infectar a otros personajes, acercarse a una enfermera, eliminarla o esperar. Los desplazamientos se calculan con A*."
+            },
+            {
+                "titulo": "Superman (juego 89): sistema basado en reglas",
+                "texto": "Un motor de reglas evalúa antecedentes como «hay un civil en peligro», «la mochila está llena» o «hay enemigos» y decide entre salvar al civil, vaciar la mochila, eliminar al enemigo o volver al centro."
+            }
+        ],
+        "resultados": {
+            "nota": "Resultados registrados en los ficheros de ejecución del proyecto, con partidas repartidas entre los niveles 0 a 4.",
+            "columnas": [
+                "Juego y técnica",
+                "Partidas",
+                "Victorias"
+            ],
+            "filas": [
+                [
+                    "Infection, árbol de decisión",
+                    "1.000",
+                    "99,8 %"
+                ],
+                [
+                    "Superman, sistema de reglas",
+                    "500",
+                    "67,8 %"
+                ]
+            ],
+            "numericas": [
+                1,
+                2
+            ],
+            "destacarMax": []
+        },
+        "imagen": "assets/img/gvgenius.webp",
+        "tecnologias": [
+            "Java",
+            "GVGAI",
+            "STRIPS",
+            "A*",
+            "Árboles de decisión",
+            "Sistemas basados en reglas",
+            "Swing",
+            "Docker"
+        ],
+        "demo": "https://demos.jcalvente083.qzz.io/#/cast/gvgenius",
+        "notaDemo": "La demo abre un escritorio remoto con la aplicación; tarda unos segundos en arrancar.",
+        "repo": "https://github.com/jcalvente083/GVGenius",
+        "codigoProximamente": false
+    },
+    {
+        "id": "sudokode",
+        "titulo": "Sudokode",
+        "descripcion": "Resuelve sudokus como un problema de satisfacción de restricciones, con AC-3 y backtracking.",
+        "insignia": "",
+        "contexto": "Prácticas de Sistemas Inteligentes, Universidad de Huelva",
+        "anio": "2025",
+        "equipo": "Individual",
+        "reconocimiento": "",
+        "contenido": [
+            "Sudokode modela cada casilla como una variable con dominio del 1 al 9, conectada por restricciones de fila, columna y caja con sus 20 vecinas. No se limita a la fuerza bruta: el algoritmo AC-3 propaga esas restricciones, poda los dominios y descarta pronto los tableros inconsistentes, y después una búsqueda con backtracking completa la solución.",
+            "Incluye una interfaz gráfica en Java Swing y una demo que se ejecuta en el navegador."
+        ],
+        "modulos": [
+            {
+                "titulo": "Probado a escala",
+                "texto": "El solver se ejecutó sobre un dataset público de un millón de sudokus, con entre 29 y 37 pistas cada uno, y los resolvió todos. Cada solución se ha comprobado: filas, columnas y cajas correctas, y todas las pistas originales respetadas."
+            }
+        ],
+        "resultados": {
+            "nota": "Ejecución sobre el dataset completo.",
+            "columnas": [
+                "Medida",
+                "Valor"
+            ],
+            "filas": [
+                [
+                    "Sudokus procesados",
+                    "1.000.000"
+                ],
+                [
+                    "Resueltos y verificados",
+                    "100 %"
+                ],
+                [
+                    "Pistas por tablero",
+                    "29 a 37"
+                ]
+            ],
+            "numericas": [
+                1
+            ],
+            "destacarMax": []
+        },
+        "imagen": "assets/img/sudokode.webp",
+        "tecnologias": [
+            "Java",
+            "CSP",
+            "AC-3",
+            "Backtracking",
+            "Swing",
+            "Docker"
+        ],
+        "demo": "https://demos.jcalvente083.qzz.io/#/cast/sudokode",
+        "notaDemo": "La demo abre un escritorio remoto con la aplicación; tarda unos segundos en arrancar.",
+        "repo": "https://github.com/jcalvente083/Sudokode",
+        "codigoProximamente": false
+    },
+    {
+        "id": "simulacion-bulos",
+        "titulo": "Simulación de propagación de bulos",
+        "descripcion": "Modelo multiagente en NetLogo para experimentar con cómo se extiende la desinformación y qué medidas la frenan.",
+        "insignia": "",
+        "contexto": "Seminario FORMA25, Universidad de Huelva",
+        "anio": "2025",
+        "equipo": "En equipo",
+        "reconocimiento": "",
+        "contenido": [
+            "Este proyecto se desarrolló durante el FORMA25 en la Universidad de Huelva. El objetivo era modelar cómo se expande la desinformación en una red social y permitir experimentar con estrategias para mitigarla.",
+            "Cien personas se mueven por el entorno. Cada una tiene una ideología, un nivel educativo, un grado de confianza, una religiosidad y una tendencia conspirativa, que determinan su probabilidad de creer un bulo. Los difusores de bulos y los de desmentidos influyen en quienes tienen cerca."
+        ],
+        "modulos": [
+            {
+                "titulo": "Qué se puede probar",
+                "texto": "Desde la interfaz se ajusta cuántos difusores hay de cada tipo y se lanzan intervenciones: banear cuentas difusoras (elimina el 30 %), activar una campaña de desmentidos que amplía su alcance, simular que el bulo se hace viral o añadir bots. Las gráficas muestran la evolución de cada grupo y cuánta gente cree el bulo según su ideología."
+            }
+        ],
+        "resultados": null,
+        "imagen": "assets/img/simulacion-bulos.webp",
+        "tecnologias": [
+            "NetLogo",
+            "Sistemas multiagente",
+            "Simulación"
+        ],
+        "demo": "./ProyectosCodigo/Forma25/Forma_25.html",
+        "notaDemo": "El modelo se ejecuta en el navegador con NetLogo Web.",
+        "repo": "",
+        "codigoProximamente": false
+    },
+    {
+        "id": "Q-Racing",
+        "titulo": "Q-Racing",
+        "descripcion": "Agente de conducción autónoma que aprende con Q-Learning en el simulador TORCS.",
+        "insignia": "",
+        "contexto": "",
+        "anio": "",
+        "equipo": "",
+        "reconocimiento": "",
+        "contenido": [
+            "Agente de conducción autónoma basado en Q-Learning y entrenado en el simulador TORCS. Aprende a conducir en un entorno simulado y mejora su rendimiento a partir de la experiencia y de la recompensa que le devuelve el entorno.",
+            "El proyecto desarrolla tres modelos de agente: uno para el control de la dirección, otro para el control de la velocidad y un tercero que aprende a controlar el volante. Al final se combinan en un agente completo capaz de conducir de forma autónoma en TORCS."
+        ],
+        "modulos": [],
+        "resultados": null,
+        "imagen": "assets/img/q-racing.webp",
+        "tecnologias": [
+            "Python",
+            "Aprendizaje por refuerzo",
+            "Q-Learning",
+            "TORCS"
+        ],
+        "demo": "",
+        "notaDemo": "",
+        "repo": "",
+        "codigoProximamente": true
+    },
+    {
+        "id": "conecta4-ia",
+        "titulo": "Conecta 4 con IA",
+        "descripcion": "Conecta 4 contra una IA escrita en Haskell que juega con minimax y poda alfa-beta, con interfaz gráfica en Python.",
+        "insignia": "",
+        "contexto": "Práctica final de Modelos Avanzados de Computación, Universidad de Huelva",
+        "anio": "2025",
+        "equipo": "En pareja con Kevin Jesús Banda Azogil",
+        "reconocimiento": "",
+        "contenido": [
+            "La interfaz gráfica se construyó en Python por su facilidad de uso, mientras que el cerebro de la IA está en un módulo de Haskell. La IA usa minimax con poda alfa-beta para anticipar jugadas y ganar al jugador humano.",
+            "Interfaz y motor se comunican a través de un fichero que representa el estado del tablero. También hay una versión para jugar en la terminal."
+        ],
+        "modulos": [],
+        "resultados": null,
+        "imagen": "assets/img/conecta4-ia.webp",
+        "tecnologias": [
+            "Haskell",
+            "Python",
+            "Minimax",
+            "Poda alfa-beta"
+        ],
+        "demo": "",
+        "notaDemo": "",
+        "repo": "https://github.com/jcalvente083/MAC_PracticaFinal_KJBA_JDCZ",
+        "codigoProximamente": false
+    },
+    {
+        "id": "filmmind",
+        "titulo": "FilmMind",
+        "descripcion": "Asistente de cine controlado por voz: preguntas habladas y respuestas habladas con datos de TMDB.",
+        "insignia": "",
+        "contexto": "",
+        "anio": "2025",
+        "equipo": "",
+        "reconocimiento": "",
+        "contenido": [
+            "FilmMind es un asistente virtual especializado en cine. Usa reconocimiento de voz para interpretar lo que pide el usuario y consulta la API de TMDB en tiempo real para dar datos sobre géneros, dirección, equipo técnico, reparto y sinopsis, además de recomendaciones.",
+            "La consulta entra como audio y la respuesta sale también como audio."
+        ],
+        "modulos": [],
+        "resultados": null,
+        "imagen": "assets/img/filmmind.webp",
+        "tecnologias": [
+            "Python",
+            "Reconocimiento de voz",
+            "Síntesis de voz",
+            "API de TMDB"
+        ],
+        "demo": "",
+        "notaDemo": "",
+        "repo": "https://github.com/jcalvente083/FilmMind",
+        "codigoProximamente": false
+    }
+]
